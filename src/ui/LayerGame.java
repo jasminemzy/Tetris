@@ -1,0 +1,120 @@
+package ui;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+
+import config.GameConfig;
+
+public class LayerGame extends Layer {
+	
+
+	//方块大小为32*32像素，也即2<<5
+	private static final int ACT_SIZE_ROLL=GameConfig.getFrameConfig().getActSizeRol();
+	
+	/**
+	 * 游戏窗口最左边点的x坐标
+	 */
+	private static final int LEFT_SIDE_X= GameConfig.getSystemConfig().getMinX();
+	
+	/**
+	 * 游戏窗口最右边点的x坐标
+	 */
+	private static final int RIGHT_SIDE_X= GameConfig.getSystemConfig().getMaxX();
+	
+	public LayerGame(int x, int y, int w, int h) {
+		super(x, y, w, h);
+	}
+	
+	public void paint(Graphics g) {
+		
+		this.createWindow(g);
+		//获得方块数组集合
+		Point[] actPoints= this.gameDto.getGameAct().getActPoints();
+		
+		//绘制阴影
+
+		this.drawShadow(actPoints, true, g);
+		
+		//获得方块类型编号(0~6)
+		int actType=this.gameDto.getGameAct().getActType();
+		//打印运动方块
+		for(int i=0; i<actPoints.length; i++) {
+			drawActByPoint(actPoints[i].x, actPoints[i].y, actType+1, g);
+		}
+		
+		//绘制地图
+		boolean[][] gameMap= this.gameDto.getGameMap();
+		//计算当前堆积方块的颜色
+		int lv= this.gameDto.getcurrentLevel();
+		//让等级1以后显示的ACT颜色在1~7之间循环
+		int imgIndex= lv==0? 0 : ( (lv-1) % 7  + 1);
+		//TODO p)如果是输的情况，imgIdx=8
+		
+		for(int x=0; x<gameMap.length; x++) {
+			for(int y=0; y<gameMap[x].length; y++) {
+				if(gameMap[x][y]) {
+					drawActByPoint(x, y, imgIndex, g);
+				}
+			}
+		}
+	}
+	
+	
+	
+	/**
+	 * 根据坐标，还有图片序号画单个方块
+	 * @param x 横坐标
+	 * @param y	纵坐标
+	 * @param imgIdx	 方块图序号 0~8
+	 * @param g 画笔
+	 */
+	private void drawActByPoint(int x, int y, int imgIdx, Graphics g) {
+		g.drawImage(Img.ACT, 
+				this.x+ (x<<ACT_SIZE_ROLL)+ 8, 
+				this.y+ (y<<ACT_SIZE_ROLL)+ 8, 
+				this.x+ ((x+1)<<ACT_SIZE_ROLL)+ 8, 
+				this.y+ ((y+1)<<ACT_SIZE_ROLL)+ 8, 
+					imgIdx<<ACT_SIZE_ROLL, 0, (imgIdx+1)<<ACT_SIZE_ROLL, 32, null);
+	}
+	
+	
+	
+	/**
+	 * 绘制阴影
+	 * 
+	 * @param actPoints
+	 * @param b
+	 */
+	private void drawShadow(Point[] actPoints, boolean isShowShadow, Graphics g) {
+		//TODO p)阴影关闭
+		if(!isShowShadow) {
+			return;
+		}
+		
+		//当前方块的最左点坐标
+		int leftX= RIGHT_SIDE_X;
+		//当前方块的最右点坐标
+		int rightX=LEFT_SIDE_X;
+		for(Point point:actPoints) {
+			leftX= (int) (leftX<point.getX() ? leftX : point.getX());
+			rightX= (int) (rightX>point.getX() ? rightX : point.getX());
+		}
+		//绘制透明竖框
+//		g.fillRect(
+//				this.x+8+(leftX<<ACT_SIZE_ROLL), 
+//				this.y+8 , 
+//				((rightX-leftX+1)<<ACT_SIZE_ROLL), 
+//				this.h-(8<<1)
+//		);
+		g.setColor(Color.WHITE);
+		g.drawImage(Img.SHADOW, 
+				this.x+8+(leftX<<ACT_SIZE_ROLL), 
+				this.y+8 , 
+				((rightX-leftX+1)<<ACT_SIZE_ROLL), 
+				this.h-(8<<1), null);
+		
+		
+	}
+	
+}
