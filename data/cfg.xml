@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+	<frame title="JAVA俄罗斯方块" width="1168" height="680" padding="16"
+	border="30" actSizeRol="5" loseIndex="8">
+		<button w="110" h="45">
+			<start x="830" y="74"/>
+			<userConfig x="970" y="74"/>
+		</button>>
+		<layer className="ui.LayerBackground" x="0" y="0" w="0" h="0"/>
+		<layer className="ui.LayerDataBase" x="40" y="32" w="334" h="279"/>
+		<layer className="ui.LayerDisk" x="40" y="343" w="334" h="279"/>
+		<layer className="ui.LayerGame" x="414" y="32" w="334" h="590"/>
+		<layer className="ui.LayerButton" x="788" y="32" w="334" h="124"/>
+		<layer className="ui.LayerNext" x="788" y="188" w="176" h="133"/>
+		<layer className="ui.LayerLevel" x="964" y="188" w="158" h="133"/>
+		<layer className="ui.LayerPoint" x="788" y="353" w="334" h="165"/>
+		<layer className="ui.LayerAbout" x="788" y="550" w="334" h="72"/>
+		
+	</frame>
+	
+	<system minX="0" maxX="9" minY="0" maxY="17" levelUp="20">
+		<rect rotatable="true">
+			<point x="4" y="0"/><point x="3" y="0"/><point x="5" y="0"/><point x="6" y="0"/>
+		</rect>
+		<rect rotatable="true">
+			<point x="4" y="0"/><point x="3" y="0"/><point x="5" y="0"/><point x="4" y="1"/>
+		</rect>
+		<rect rotatable="true">
+			<point x="4" y="0"/><point x="3" y="0"/><point x="5" y="0"/><point x="3" y="1"/>
+		</rect>
+		<rect rotatable="true">
+			<point x="4" y="0"/><point x="5" y="0"/><point x="3" y="1"/><point x="4" y="1"/>
+		</rect>
+		<rect rotatable="false">
+			<point x="4" y="0"/><point x="5" y="0"/><point x="4" y="1"/><point x="5" y="1"/>
+		</rect>
+		<rect rotatable="true">
+			<point x="4" y="0"/><point x="3" y="0"/><point x="5" y="0"/><point x="5" y="1"/>
+		</rect>
+		<rect rotatable="true">
+			<point x="4" y="0"/><point x="3" y="0"/><point x="4" y="1"/><point x="5" y="1"/>
+		</rect>
+	</system>
+	
+	<data maxRow="5" >
+		<dataA className="dao.DataBase">
+			<param key="driver" value=""/>
+			<param key="dbUrl" value=""/>
+			<param key="dbUser" value=""/>
+			<param key="dbPwd" value=""/>
+		</dataA>
+		<dataB className="dao.DataDisk">
+			<param key="path" value="data/record.dat"/>
+			<param key="" value=""/>
+			<param key="" value=""/>
+			
+		</dataB>>
+	</data>
+	
+</game>
