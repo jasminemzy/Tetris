@@ -19,6 +19,7 @@ public class PlayerControler extends KeyAdapter{
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
+<<<<<<< HEAD
 		//TODO p)这样的枚举写法不好
 		
 		this.gameControler.actionByKeyCode(e.getKeyCode());
@@ -43,6 +44,11 @@ public class PlayerControler extends KeyAdapter{
 //		default:
 //			break;
 //		}
+=======
+		
+		this.gameControler.actionByKeyCode(e.getKeyCode());
+		
+>>>>>>> try using cmd
 	}
 
 

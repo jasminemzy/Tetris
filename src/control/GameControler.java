@@ -167,9 +167,27 @@ public class GameControler {
 	 * 子窗口关闭事件
 	 */
 	public void setOver() {
+<<<<<<< HEAD
 //		this.jPanelGame.repaint();
 		this.setControlConfig();
 	}
+=======
+		this.jPanelGame.repaint();
+		this.setControlConfig();
+	}
+
+
+
+	/**
+	 * 开始按钮事件
+	 */
+	public void startGame() {
+		this.jPanelGame.buttonSwitch(false);
+		this.gameService.startMainThread();
+		this.jPanelGame.repaint();
+		
+	}
+>>>>>>> try using cmd
 	
 	
 	

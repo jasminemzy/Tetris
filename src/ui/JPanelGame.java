@@ -47,6 +47,10 @@ public class JPanelGame extends JPanel{
 		initLayer();
 		//初始化按钮
 		initComponent();
+<<<<<<< HEAD
+=======
+	
+>>>>>>> try using cmd
 	}
 	
 	
@@ -71,7 +75,17 @@ public class JPanelGame extends JPanel{
 				GameConfig.getFrameConfig().getButtonConfig().getStartY(), 
 				GameConfig.getFrameConfig().getButtonConfig().getButtonW(),
 				GameConfig.getFrameConfig().getButtonConfig().getButtonH());
+<<<<<<< HEAD
 		this.add(btnStart);
+=======
+		//给开始按钮增加事件监听
+		this.btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gameControler.startGame();
+			}
+		});
+		this.add(this.btnStart);
+>>>>>>> try using cmd
 		
 		//初始化设置按钮
 		this.btnConfig= new JButton(Img.BTN_CONFIG);
@@ -86,8 +100,13 @@ public class JPanelGame extends JPanel{
 				gameControler.showUserConfig();
 			}
 		});
+<<<<<<< HEAD
 		
 		this.add(btnConfig);
+=======
+		this.add(this.btnConfig);	
+
+>>>>>>> try using cmd
 	}
 	
 	
@@ -138,6 +157,18 @@ public class JPanelGame extends JPanel{
 	
 	
 	
+<<<<<<< HEAD
+=======
+	/**
+	 * 控制按钮是否可以点击
+	 */
+	public void buttonSwitch(boolean onOff) {
+		this.btnConfig.setEnabled(onOff);
+		this.btnStart.setEnabled(onOff);
+	}
+	
+	
+>>>>>>> try using cmd
 	public void setGameControler(GameControler gameControler) {
 		this.gameControler = gameControler;
 	}

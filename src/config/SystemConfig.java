@@ -2,7 +2,13 @@ package config;
 
 import java.awt.Point;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+>>>>>>> try using cmd
 
 import org.dom4j.Element;
 
@@ -16,6 +22,10 @@ public class SystemConfig {
 	
 	private final List<Boolean> rotatebles;
 	private static List<Point[]> actTypeConfig;
+<<<<<<< HEAD
+=======
+	private final Map<Integer, Integer> plusPointMap;
+>>>>>>> try using cmd
 	
 	public SystemConfig(Element system) {
 		minX= Integer.parseInt(system.attributeValue("minX"));
@@ -45,6 +55,23 @@ public class SystemConfig {
 			//把point对象数组放入typeconfig中
 			actTypeConfig.add(pointsDest);
 		}
+<<<<<<< HEAD
+=======
+		
+		//获取消行与所加分数的对应
+		this.plusPointMap= new HashMap<Integer,Integer>();
+		List<Element> plusPointsCfg=system.elements("plusPoint");
+		for(Element plusPoint: plusPointsCfg) {
+			int rm= Integer.parseInt(plusPoint.attributeValue("rm"));
+			int point= Integer.parseInt(plusPoint.attributeValue("point"));
+			this.plusPointMap.put(rm, point);
+		}
+		
+	}
+
+	public Map<Integer, Integer> getPlusPointMap() {
+		return plusPointMap;
+>>>>>>> try using cmd
 	}
 
 	public List<Boolean> getRotatebles() {

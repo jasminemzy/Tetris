@@ -152,8 +152,11 @@ public class FrameConfig extends JFrame{
 		//显示应用按钮
 		jPanel.add(this.btnApply);
 		
+<<<<<<< HEAD
 		
 		
+=======
+>>>>>>> try using cmd
 		//讲创建好的按钮面板返回
 		return jPanel;
 	}
@@ -169,6 +172,10 @@ public class FrameConfig extends JFrame{
 		JTabbedPane jTabbedPane= new JTabbedPane();
 		jTabbedPane.addTab("控制设置", this.createControlPanel());
 		jTabbedPane.addTab("皮肤设置", new JLabel("皮肤"));
+<<<<<<< HEAD
+=======
+		
+>>>>>>> try using cmd
 		return jTabbedPane;
 	}
 	
