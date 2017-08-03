@@ -2,15 +2,10 @@ package service;
 
 import java.awt.Point;
 import java.util.List;
-<<<<<<< HEAD
-import java.util.Random;
-
-=======
 import java.util.Map;
 import java.util.Random;
 
 import config.GameConfig;
->>>>>>> try using cmd
 import dto.GameDto;
 import dto.Player;
 import entity.GameAct;
@@ -27,18 +22,6 @@ public class GameTetris implements GameService {
 	/**
 	 * 方块种类数
 	 */
-<<<<<<< HEAD
-	private static final int MAX_TYPE= 6;
-	
-	public GameTetris(GameDto gameDto) {
-		this.gameDto=gameDto;
-		GameAct gameAct= new GameAct(random.nextInt(MAX_TYPE));
-		gameDto.setGameAct(gameAct);
-	}
-
-	
-
-=======
 	private static final int MAX_TYPE= GameConfig.getSystemConfig().getActTypeConfig().size();
 	
 	/**
@@ -55,7 +38,6 @@ public class GameTetris implements GameService {
 	}
 	
 	
->>>>>>> try using cmd
 	
 	/**
 	 * 方块操作（上）
@@ -86,14 +68,6 @@ public class GameTetris implements GameService {
 		for(int i=0; i<gameAct.length; i++) {
 			gameMap[gameAct[i].x][gameAct[i].y]= true;
 		}
-<<<<<<< HEAD
-		// 判断是否可以消行
-		// 消行操作
-		// 算分操作
-		// 判断是否升级
-		// 升级
-		
-=======
 
 		// 执行消行，并返回此次共消了多少行
 		int removedLineCount= this.removeLines();
@@ -101,20 +75,13 @@ public class GameTetris implements GameService {
 		if(removedLineCount>0) {
 			this.updateDtoExpInformation(removedLineCount);
 		}
->>>>>>> try using cmd
 		
 		//在顶部创建新的下一个方块
 		this.gameDto.getGameAct().init(this.gameDto.getNext());
 		//随机生成再下一个方块
-<<<<<<< HEAD
-		this.gameDto.setNext(random.nextInt(MAX_TYPE));
-		
-		
-=======
 		this.gameDto.setNext(random.nextInt(MAX_TYPE-1));
 		
 
->>>>>>> try using cmd
 	}
 
 
@@ -189,11 +156,6 @@ public class GameTetris implements GameService {
 	public void setDiskRecord(List<Player> players) {
 		this.gameDto.setDiskRecord(players);
 	}
-<<<<<<< HEAD
-
-
-
-=======
 	
 	
 	
@@ -295,5 +257,4 @@ public class GameTetris implements GameService {
 	
 	
 	
->>>>>>> try using cmd
 }

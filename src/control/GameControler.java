@@ -167,11 +167,6 @@ public class GameControler {
 	 * 子窗口关闭事件
 	 */
 	public void setOver() {
-<<<<<<< HEAD
-//		this.jPanelGame.repaint();
-		this.setControlConfig();
-	}
-=======
 		this.jPanelGame.repaint();
 		this.setControlConfig();
 	}
@@ -187,7 +182,6 @@ public class GameControler {
 		this.jPanelGame.repaint();
 		
 	}
->>>>>>> try using cmd
 	
 	
 	

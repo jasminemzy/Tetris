@@ -10,11 +10,6 @@ import entity.GameAct;
 
 public class GameDto {
 	
-<<<<<<< HEAD
-	private static final int GAMEZONE_W= GameConfig.getSystemConfig().getMaxX()-GameConfig.getSystemConfig().getMinX() +1;
-	
-	private static final int GAMEZONE_H= GameConfig.getSystemConfig().getMaxY()-GameConfig.getSystemConfig().getMinY() +1;
-=======
 	/**
 	 * 游戏区域宽度
 	 */
@@ -24,7 +19,6 @@ public class GameDto {
 	 * 游戏区域高度
 	 */
 	public static final int GAMEZONE_H= GameConfig.getSystemConfig().getMaxY()-GameConfig.getSystemConfig().getMinY() +1;
->>>>>>> try using cmd
 	
 	/**
 	 * 数据库记录
@@ -66,14 +60,11 @@ public class GameDto {
 	 */
 	private int currentRemovedLine;
 	
-<<<<<<< HEAD
-=======
 	/**
 	 * 游戏是否是开始状态
 	 */
 	private boolean gameStart;
 	
->>>>>>> try using cmd
 	
 	
 	/**
@@ -176,9 +167,6 @@ public class GameDto {
 		this.currentRemovedLine = currentRemovedLine;
 	}
 	
-<<<<<<< HEAD
-	
-=======
 	public boolean isGameStart() {
 		return gameStart;
 	}
@@ -186,7 +174,6 @@ public class GameDto {
 	public void setGameStart(boolean gameStart) {
 		this.gameStart = gameStart;
 	}
->>>>>>> try using cmd
 	
 	
 }

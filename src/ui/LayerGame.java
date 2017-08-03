@@ -5,10 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import config.GameConfig;
-<<<<<<< HEAD
-=======
 import entity.GameAct;
->>>>>>> try using cmd
 
 public class LayerGame extends Layer {
 	
@@ -26,45 +23,12 @@ public class LayerGame extends Layer {
 	 */
 	private static final int RIGHT_SIDE_X= GameConfig.getSystemConfig().getMaxX();
 	
-<<<<<<< HEAD
-=======
 	
 	
->>>>>>> try using cmd
 	public LayerGame(int x, int y, int w, int h) {
 		super(x, y, w, h);
 	}
 	
-<<<<<<< HEAD
-	public void paint(Graphics g) {
-		
-		this.createWindow(g);
-		//获得方块数组集合
-		Point[] actPoints= this.gameDto.getGameAct().getActPoints();
-		
-		//绘制阴影
-
-		this.drawShadow(actPoints, true, g);
-		
-		//获得方块类型编号(0~6)
-		int actType=this.gameDto.getGameAct().getActType();
-		//打印运动方块
-		for(int i=0; i<actPoints.length; i++) {
-			drawActByPoint(actPoints[i].x, actPoints[i].y, actType+1, g);
-		}
-		
-		//绘制地图
-		boolean[][] gameMap= this.gameDto.getGameMap();
-		//计算当前堆积方块的颜色
-		int lv= this.gameDto.getcurrentLevel();
-		//让等级1以后显示的ACT颜色在1~7之间循环
-		int imgIndex= lv==0? 0 : ( (lv-1) % 7  + 1);
-		//TODO p)如果是输的情况，imgIdx=8
-		
-		for(int x=0; x<gameMap.length; x++) {
-			for(int y=0; y<gameMap[x].length; y++) {
-				if(gameMap[x][y]) {
-=======
 	
 	
 	public void paint(Graphics g) {
@@ -119,7 +83,6 @@ public class LayerGame extends Layer {
 		for (int x = 0; x < gameMap.length; x++) {
 			for (int y = 0; y < gameMap[x].length; y++) {
 				if (gameMap[x][y]) {
->>>>>>> try using cmd
 					drawActByPoint(x, y, imgIndex, g);
 				}
 			}
@@ -166,17 +129,7 @@ public class LayerGame extends Layer {
 			leftX= (int) (leftX<point.getX() ? leftX : point.getX());
 			rightX= (int) (rightX>point.getX() ? rightX : point.getX());
 		}
-<<<<<<< HEAD
-		//绘制透明竖框
-//		g.fillRect(
-//				this.x+8+(leftX<<ACT_SIZE_ROLL), 
-//				this.y+8 , 
-//				((rightX-leftX+1)<<ACT_SIZE_ROLL), 
-//				this.h-(8<<1)
-//		);
-=======
 		
->>>>>>> try using cmd
 		g.setColor(Color.WHITE);
 		g.drawImage(Img.SHADOW, 
 				this.x+8+(leftX<<ACT_SIZE_ROLL), 

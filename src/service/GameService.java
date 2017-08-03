@@ -57,14 +57,11 @@ public interface GameService {
 	 * @param players
 	 */
 	public void setDiskRecord(List<Player> players);
-<<<<<<< HEAD
-=======
 
 	/**
 	 * 启动主线程，开始游戏
 	 */
 	public void startMainThread();
->>>>>>> try using cmd
 	
 	
 }
