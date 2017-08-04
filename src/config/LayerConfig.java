@@ -1,6 +1,8 @@
 package config;
 
-public class LayerConfig {
+import java.io.Serializable;
+
+public class LayerConfig implements Serializable{
 	private String className;
 	private int x;
 	private int y;

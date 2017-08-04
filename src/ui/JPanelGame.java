@@ -1,6 +1,8 @@
 package ui;
 
+import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Desktop.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
@@ -21,11 +23,13 @@ public class JPanelGame extends JPanel{
 
 	private List<Layer> layers=null;
 	
-	private GameDto gameDto= null;
-	
 	private JButton btnStart;
 	
 	private JButton btnConfig;
+
+	private ActionListener listenerStart;
+	
+	private ActionListener listenerConfig;
 	
 	private GameControler gameControler= null;
 	
@@ -36,29 +40,21 @@ public class JPanelGame extends JPanel{
 	 * 读取配置
 	 * 画出游戏界面上各个面板边框
 	 */
-	public JPanelGame(GameDto gameDto) {
-		//获得DTO对象
-		this.gameDto=gameDto;
+	public JPanelGame(GameControler gameControler,GameDto gameDto) {
+		//连接游戏控制器
+		this.gameControler=gameControler;
 		//设置布局管理器为自由布局
 		this.setLayout(null);
 		//初始化组件
-		initComponent();
+		this.initComponent();
 		//初始化层
-		initLayer();
-		//初始化按钮
-		initComponent();
-	
+		this.initLayer(gameDto);
+		//初始化键盘监听器并且与jpanel连接
+		this.addKeyListener(new PlayerControler(gameControler));
 	}
 	
 	
 	
-	/**
-	 * 安装玩家控制器
-	 * @param playerControler
-	 */
-	public void setPlayerControler(PlayerControler playerControler) {
-		this.addKeyListener(playerControler);
-	}
 	/**
 	 * 初始化组件
 	 */
@@ -73,11 +69,15 @@ public class JPanelGame extends JPanel{
 				GameConfig.getFrameConfig().getButtonConfig().getButtonW(),
 				GameConfig.getFrameConfig().getButtonConfig().getButtonH());
 		//给开始按钮增加事件监听
-		this.btnStart.addActionListener(new ActionListener() {
+		this.listenerStart= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(btnStart.isEnabled()) {
 				gameControler.startGame();
+				requestFocus();
+				}
 			}
-		});
+		};
+		this.btnStart.addActionListener(this.listenerStart);
 		this.add(this.btnStart);
 		
 		//初始化设置按钮
@@ -88,11 +88,14 @@ public class JPanelGame extends JPanel{
 				GameConfig.getFrameConfig().getButtonConfig().getUserConfigY(), 
 				GameConfig.getFrameConfig().getButtonConfig().getButtonW(),
 				GameConfig.getFrameConfig().getButtonConfig().getButtonH());
-		this.btnConfig.addActionListener(new ActionListener() {
+		this.listenerConfig= new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gameControler.showUserConfig();
+				if(btnConfig.isEnabled()) {
+					gameControler.showUserConfig();
+				}
 			}
-		});
+		};
+		this.btnConfig.addActionListener(this.listenerConfig);
 		this.add(this.btnConfig);	
 
 	}
@@ -102,7 +105,7 @@ public class JPanelGame extends JPanel{
 	/**
 	 * 初始化层
 	 */
-	private void initLayer() {
+	private void initLayer(GameDto gameDto) {
 		
 		try {
 			//获得游戏配置
@@ -122,7 +125,7 @@ public class JPanelGame extends JPanel{
 					layerCfg.getX(), layerCfg.getY(), layerCfg.getW(),layerCfg.getH()
 				);
 				//设计游戏数据对象
-				layer.setGameDto(this.gameDto);
+				layer.setGameDto(gameDto);
 				//把创建的Layer对象放入列表
 				layers.add(layer);
 			}
@@ -154,9 +157,10 @@ public class JPanelGame extends JPanel{
 	}
 	
 	
-	public void setGameControler(GameControler gameControler) {
-		this.gameControler = gameControler;
+	
+	public void setJPanelFocused() {
+		this.setFocusable(true);
+		this.requestFocus();
 	}
-
 	
 }

@@ -1,6 +1,7 @@
 package config;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 import org.dom4j.Element;
 
-public class SystemConfig {
+public class SystemConfig implements Serializable{
 
 	private final int minX;
 	private final int maxX;
@@ -88,8 +89,9 @@ public class SystemConfig {
 		return maxY;
 	}
 
-	public static List<Point[]> getActTypeConfig() {
+	public List<Point[]> getActTypeConfig() {
 		return actTypeConfig;
 	}
+
 
 }

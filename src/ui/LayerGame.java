@@ -23,6 +23,10 @@ public class LayerGame extends Layer {
 	 */
 	private static final int RIGHT_SIDE_X= GameConfig.getSystemConfig().getMaxX();
 	
+	private static final int LOSE_IDX= GameConfig.getFrameConfig().getLoseIndex();
+	
+	private static final int THIN_BORDER= GameConfig.getFrameConfig().getThinBorder();
+	
 	
 	
 	public LayerGame(int x, int y, int w, int h) {
@@ -34,18 +38,22 @@ public class LayerGame extends Layer {
 	public void paint(Graphics g) {
 		
 		this.createWindow(g);
-		if(this.gameDto.isGameStart()) {
-			// 获得方块数组集合
+		// 获得方块数组集合
+		GameAct gameAct= this.gameDto.getGameAct();
+		if(gameAct!=null) {
 			Point[] actPoints = this.gameDto.getGameAct().getActPoints();
 			// 绘制阴影
-			this.drawShadow(actPoints, true, g);
-			//绘制活动方块
-			this.drawWholeAct(actPoints,g);
-			
+			this.drawShadow(actPoints, g);
+			// 绘制活动方块
+			this.drawWholeAct(actPoints, g);
 		}
-		//绘制游戏地图
-		this.drawMap(g);
 		
+		// 绘制游戏地图
+		this.drawMap(g);
+		// 暂停
+		if(this.gameDto.isPause()) {
+			drawImageAtCenter(Img.PAUSE, g);
+		}
 	}
 	
 	
@@ -61,7 +69,7 @@ public class LayerGame extends Layer {
 		int actType = this.gameDto.getGameAct().getActType();
 		// 打印运动方块
 		for (int i = 0; i < actPoints.length; i++) {
-			drawActByPoint(actPoints[i].x, actPoints[i].y, actType + 1, g);
+			this.drawActByPoint(actPoints[i].x, actPoints[i].y, actType + 1, g);
 		}
 	}
 	
@@ -78,12 +86,10 @@ public class LayerGame extends Layer {
 		int lv = this.gameDto.getcurrentLevel();
 		// 让等级1以后显示的ACT颜色在1~7之间循环
 		int imgIndex = lv == 0 ? 0 : ((lv - 1) % 7 + 1);
-		// TODO p)如果是输的情况，imgIdx=8
-
 		for (int x = 0; x < gameMap.length; x++) {
 			for (int y = 0; y < gameMap[x].length; y++) {
 				if (gameMap[x][y]) {
-					drawActByPoint(x, y, imgIndex, g);
+					this.drawActByPoint(x, y, imgIndex, g);
 				}
 			}
 		}
@@ -99,12 +105,13 @@ public class LayerGame extends Layer {
 	 * @param g 画笔
 	 */
 	private void drawActByPoint(int x, int y, int imgIdx, Graphics g) {
+		imgIdx= this.gameDto.isGameStart()? imgIdx:LOSE_IDX;
 		g.drawImage(Img.ACT, 
-				this.x+ (x<<ACT_SIZE_ROLL)+ 8, 
-				this.y+ (y<<ACT_SIZE_ROLL)+ 8, 
-				this.x+ ((x+1)<<ACT_SIZE_ROLL)+ 8, 
-				this.y+ ((y+1)<<ACT_SIZE_ROLL)+ 8, 
-					imgIdx<<ACT_SIZE_ROLL, 0, (imgIdx+1)<<ACT_SIZE_ROLL, 32, null);
+				this.x+ (x<<ACT_SIZE_ROLL)+ THIN_BORDER, 
+				this.y+ (y<<ACT_SIZE_ROLL)+ THIN_BORDER, 
+				this.x+ ((x+1)<<ACT_SIZE_ROLL)+ THIN_BORDER, 
+				this.y+ ((y+1)<<ACT_SIZE_ROLL)+ THIN_BORDER, 
+					imgIdx<<ACT_SIZE_ROLL, 0, (imgIdx+1)<<ACT_SIZE_ROLL, 1<<ACT_SIZE_ROLL, null);
 	}
 	
 	
@@ -115,9 +122,9 @@ public class LayerGame extends Layer {
 	 * @param actPoints
 	 * @param b
 	 */
-	private void drawShadow(Point[] actPoints, boolean isShowShadow, Graphics g) {
+	private void drawShadow(Point[] actPoints, Graphics g) {
 		//TODO p)阴影关闭
-		if(!isShowShadow) {
+		if(!this.gameDto.isShowShadow()) {
 			return;
 		}
 		

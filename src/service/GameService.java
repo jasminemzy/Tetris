@@ -1,67 +1,55 @@
 package service;
 
-import java.util.List;
-
-import dto.Player;
-
 public interface GameService {
 
 	/**
 	 * 方向键上
 	 */
-	public void KeyUp();
+	public boolean KeyUp();
 	
 	/**
 	 * 方向键下
 	 */
-	public void KeyDown();
+	public boolean KeyDown();
 	
 	/**
 	 * 方向键左
 	 */
-	public void KeyLeft();
+	public boolean KeyLeft();
 	
 	/**
 	 * 方向键右
 	 */
-	public void KeyRight();
+	public boolean KeyRight();
 	
 	/**
 	 * 三角
 	 */
-	public void KeyFunctionUp();
+	public boolean KeyFunctionUp();
 	
 	/**
 	 * 大叉
 	 */
-	public void KeyFunctionDown();
+	public boolean KeyFunctionDown();
 	
 	/**
 	 * 方块
 	 */
-	public void KeyFunctionLeft();
+	public boolean KeyFunctionLeft();
 	
 	/**
 	 * 圆圈
 	 */
-	public void KeyFunctionRight();
+	public boolean KeyFunctionRight();
 	
-	/**
-	 * 设置数据库数据对象
-	 * @param players
-	 */
-	public void setDbRecord(List<Player> players);
-	
-	/**
-	 * 设置本地磁盘数据对象
-	 * @param players
-	 */
-	public void setDiskRecord(List<Player> players);
-
 	/**
 	 * 启动主线程，开始游戏
 	 */
-	public void startMainThread();
+	public void startGame();
 	
+	/**
+	 * 游戏主要行为
+	 */
+	public void mainAction();
 	
 }

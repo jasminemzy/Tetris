@@ -1,8 +1,10 @@
 package config;
 
+import java.io.Serializable;
+
 import org.dom4j.Element;
 
-public class DataConfig {
+public class DataConfig implements Serializable{
 
 	private final DataInterfaceConfig dataA;
 	

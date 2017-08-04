@@ -1,12 +1,12 @@
 package config;
 
-import java.awt.Button;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Element;
 
-public class FrameConfig {
+public class FrameConfig implements Serializable{
 
 	 /**
 	 * 游戏标题
@@ -32,6 +32,11 @@ public class FrameConfig {
 	 * 子边框裁切边角大小
 	 */
 	 private final int border;
+	 
+	 /**
+	 * 自边框上下左右的细边距
+	 */
+	private final int thinBorder;
 	 
 	 /**
 	 * 方块大小所需移位（<<actSizeRol）
@@ -63,6 +68,7 @@ public class FrameConfig {
 		this.height=Integer.parseInt(frame.attributeValue("height"));
 		this.padding=Integer.parseInt(frame.attributeValue("padding"));
 		this.border=Integer.parseInt(frame.attributeValue("border"));
+		this.thinBorder=Integer.parseInt(frame.attributeValue("thinBorder"));
 		this.actSizeRol= Integer.parseInt(frame.attributeValue("actSizeRol"));
 		this.loseIndex= Integer.parseInt(frame.attributeValue("loseIndex"));
 		
@@ -84,6 +90,7 @@ public class FrameConfig {
 		buttonConfig= new ButtonConfig(frame.element("button"));
 		
 	}
+
 
 
 
@@ -131,6 +138,12 @@ public class FrameConfig {
 
 	public int getBorder() {
 		return border;
+	}
+
+
+
+	public int getThinBorder() {
+		return thinBorder;
 	}
 
 

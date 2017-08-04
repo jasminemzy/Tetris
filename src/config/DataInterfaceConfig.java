@@ -1,12 +1,13 @@
 package config;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Element;
 
-public class DataInterfaceConfig {
+public class DataInterfaceConfig implements Serializable{
 	
 	private final String className;
 	

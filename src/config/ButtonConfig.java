@@ -1,8 +1,10 @@
 package config;
 
+import java.io.Serializable;
+
 import org.dom4j.Element;
 
-public class ButtonConfig {
+public class ButtonConfig implements Serializable{
 	
 	private final int buttonW;
 	

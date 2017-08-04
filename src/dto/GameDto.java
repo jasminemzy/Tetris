@@ -1,12 +1,12 @@
 package dto;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import config.GameConfig;
 import entity.GameAct;
+import util.GameFunction;
 
 public class GameDto {
 	
@@ -61,12 +61,36 @@ public class GameDto {
 	private int currentRemovedLine;
 	
 	/**
+	 * 线程睡眠时间(方块下落速度)
+	 */
+	private long sleepTime;
+	
+	public long getSleepTime() {
+		return sleepTime;
+	}
+
+	/**
 	 * 游戏是否是开始状态
 	 */
 	private boolean gameStart;
 	
+	/**
+	 * 是否显示方块背后阴影
+	 */
+	private boolean showShadow;
 	
+	/**
+	 * 暂停状态
+	 */
+	private boolean pause;
 	
+	/**
+	 * 是否允许使用作弊键
+	 */
+	private boolean cheat;
+
+
+
 	/**
 	 * 构造函数
 	 */
@@ -79,12 +103,25 @@ public class GameDto {
 	 * DTO初始化
 	 */
 	public void gameDtoInit() {
+		//清除游戏地图
 		this.gameMap= new boolean[GAMEZONE_W][GAMEZONE_H];
+		//默认显示阴影
+		this.showShadow=true;
+		this.pause=false;
+		this.cheat=false;
+		//初始化分数
+		this.currentLevel=0;
+		this.currentPoint=0;
+		this.currentRemovedLine=0;
+		this.sleepTime=GameFunction.getSleepTimeByLevel(this.currentLevel);
 		//TODO p)初始化所有游戏对象
 	}
 	
 	
 	
+
+
+
 	private void setFilledRecord(List<Player> players) {
 		//如果进来的是空列表，那就创建
 		if (players == null) {
@@ -149,6 +186,7 @@ public class GameDto {
 
 	public void setcurrentLevel(int currentLevel) {
 		this.currentLevel = currentLevel;
+		this.sleepTime=GameFunction.getSleepTimeByLevel(this.currentLevel);
 	}
 
 	public int getCurrentPoint() {
@@ -175,5 +213,27 @@ public class GameDto {
 		this.gameStart = gameStart;
 	}
 	
+	public boolean isShowShadow() {
+		return showShadow;
+	}
 	
+	public void reverseShowShadow() {
+		this.showShadow = !this.showShadow;
+	}
+	
+	public boolean isPause() {
+		return pause;
+	}
+	
+	public void reversePause() {
+		this.pause = !this.pause;
+	}
+	
+	public boolean isCheat() {
+		return cheat;
+	}
+
+	public void setCheat(boolean cheat) {
+		this.cheat = cheat;
+	}
 }
